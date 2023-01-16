@@ -10,6 +10,8 @@ class Node {
 
 class Tree {
   constructor(arr) {
+    if (!arr) throw "missing constructor argument!";
+
     // Remove duplicates and sort array
     arr = [...new Set(arr)];
     arr.sort((a, b) => a - b);
@@ -34,6 +36,70 @@ class Tree {
     return root;
   }
 
+  insert(data, node = this.root) {
+    if (!data) throw "missing argument!";
+
+    if (node === null) {
+      return new Node(data);
+    }
+
+    if (data < node.data) {
+      node.leftChild = this.insert(data, node.leftChild);
+    }
+
+    if (data > node.data) {
+      node.rightChild = this.insert(data, node.rightChild);
+    }
+
+    return node;
+  }
+
+  delete(data, node = this.root) {
+    if (node === null) {
+      return node;
+    }
+
+    if (data < node.data) {
+      node.leftChild = this.delete(data, node.leftChild);
+    }
+
+    if (data > node.data) {
+      node.rightChild = this.delete(data, node.rightChild);
+    }
+
+    if (data === node.data) {
+      // Leaf node
+      if (!node.leftChild && !node.rightChild) return null;
+
+      // Only left child
+      if (node.leftChild && !node.rightChild) {
+        node = node.leftChild;
+        node.leftChild = null;
+      }
+
+      // Only right child
+      if (!node.leftChild && node.rightChild) {
+        node = node.rightChild;
+        node.rightChild = null;
+      }
+
+      // Both children
+      if (node.leftChild && node.rightChild) {
+        function findInorderSuccessor(node) {
+          if (!node.leftChild) return node.data;
+
+          findInorderSuccessor(node.leftChild);
+        }
+
+        const inorderSuccessor = findInorderSuccessor(node.rightChild);
+        node.data = inorderSuccessor;
+        node.rightChild = this.delete(inorderSuccessor, node.rightChild);
+      }
+    }
+
+    return node;
+  }
+
   prettyPrint = (node = this.root, prefix = "", isLeft = true) => {
     if (node.rightChild !== null) {
       this.prettyPrint(
@@ -54,4 +120,14 @@ class Tree {
 }
 
 const tree = new Tree(testArray);
+tree.insert(3);
+tree.insert(8);
+tree.insert(10);
+tree.insert(22);
+tree.prettyPrint();
+tree.delete(22);
+tree.prettyPrint();
+tree.delete(8);
+tree.prettyPrint();
+tree.delete(6);
 tree.prettyPrint();
