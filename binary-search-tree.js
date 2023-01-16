@@ -173,6 +173,27 @@ class Tree {
     }
   }
 
+  height(data) {
+    function calcHeight(node, height = -1) {
+      height++;
+
+      const leafNode = !node.leftChild && !node.rightChild;
+      if (leafNode) return height;
+
+      const leftHeight = node.leftChild
+        ? calcHeight(node.leftChild, height)
+        : 0;
+      const rightHeight = node.rightChild
+        ? calcHeight(node.rightChild, height)
+        : 0;
+
+      return leftHeight > rightHeight ? leftHeight : rightHeight;
+    }
+
+    const node = this.find(data);
+    return node ? calcHeight(node) : null;
+  }
+
   prettyPrint = (node = this.root, prefix = "", isLeft = true) => {
     if (node.rightChild !== null) {
       this.prettyPrint(
@@ -197,25 +218,30 @@ tree.insert(3);
 tree.insert(8);
 tree.insert(10);
 tree.insert(22);
+// tree.prettyPrint();
+// tree.delete(22);
+// // tree.prettyPrint();
+// tree.delete(8);
+// // tree.prettyPrint();
+// tree.delete(6);
 tree.prettyPrint();
-tree.delete(22);
-tree.prettyPrint();
-tree.delete(8);
-tree.prettyPrint();
-tree.delete(6);
-tree.prettyPrint();
-console.log(tree.find(6));
-console.log(tree.find(7));
-function callback(node) {
-  console.log("traversal:");
-  console.log(node);
-  console.log(" ");
-}
-tree.levelOrder(callback);
-console.log(tree.levelOrder());
-tree.inorder(callback);
-console.log(tree.inorder());
-tree.preorder(callback);
-console.log(tree.preorder());
-tree.postorder(callback);
-console.log(tree.postorder());
+// console.log(tree.find(6));
+// console.log(tree.find(7));
+// function callback(node) {
+//   console.log("traversal:");
+//   console.log(node);
+//   console.log(" ");
+// }
+// tree.levelOrder(callback);
+// console.log(tree.levelOrder());
+// tree.inorder(callback);
+// console.log(tree.inorder());
+// tree.preorder(callback);
+// console.log(tree.preorder());
+// tree.postorder(callback);
+// console.log(tree.postorder());
+console.log(tree.height(4));
+console.log(tree.height(2));
+console.log(tree.height(10));
+console.log(tree.height(22));
+console.log(tree.height(42));
