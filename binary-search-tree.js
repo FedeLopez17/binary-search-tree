@@ -195,7 +195,7 @@ class Tree {
   }
 
   depth(data, node = this.root) {
-    if (data === null) throw "missing argument!";
+    if (!data) throw "missing argument!";
 
     if (data === node.data) {
       return 0;
@@ -273,3 +273,4 @@ console.log(tree.depth(8));
 console.log(tree.depth(6));
 console.log(tree.depth(3));
 console.log(tree.depth(78));
+console.log(tree.depth());
