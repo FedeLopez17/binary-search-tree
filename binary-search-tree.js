@@ -127,6 +127,22 @@ class Tree {
     }
   }
 
+  inorder(callback, node = this.root, inorderData = []) {
+    if (node === null) return;
+
+    if (node.leftChild) this.inorder(callback, node.leftChild, inorderData);
+
+    if (callback) {
+      callback(node);
+    } else {
+      inorderData.push(node.data);
+    }
+
+    if (node.rightChild) this.inorder(callback, node.rightChild, inorderData);
+
+    if (inorderData.length) return inorderData;
+  }
+
   prettyPrint = (node = this.root, prefix = "", isLeft = true) => {
     if (node.rightChild !== null) {
       this.prettyPrint(
@@ -161,9 +177,11 @@ tree.prettyPrint();
 console.log(tree.find(6));
 console.log(tree.find(7));
 function callback(node) {
-  console.log("level order:");
+  console.log("traversal:");
   console.log(node);
   console.log(" ");
 }
 tree.levelOrder(callback);
 console.log(tree.levelOrder());
+tree.inorder(callback);
+console.log(tree.inorder());
