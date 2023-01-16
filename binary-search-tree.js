@@ -143,6 +143,21 @@ class Tree {
     if (inorderData.length) return inorderData;
   }
 
+  preorder(callback, node = this.root, preorderData = []) {
+    if (node === null) return;
+
+    if (callback) {
+      callback(node);
+    } else {
+      preorderData.push(node.data);
+    }
+
+    if (node.leftChild) this.preorder(callback, node.leftChild, preorderData);
+    if (node.rightChild) this.preorder(callback, node.rightChild, preorderData);
+
+    if (preorderData.length) return preorderData;
+  }
+
   prettyPrint = (node = this.root, prefix = "", isLeft = true) => {
     if (node.rightChild !== null) {
       this.prettyPrint(
@@ -185,3 +200,5 @@ tree.levelOrder(callback);
 console.log(tree.levelOrder());
 tree.inorder(callback);
 console.log(tree.inorder());
+tree.preorder(callback);
+console.log(tree.preorder());
