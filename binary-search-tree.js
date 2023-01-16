@@ -158,6 +158,21 @@ class Tree {
     if (preorderData.length) return preorderData;
   }
 
+  postorder(callback, node = this.root, postorderData = []) {
+    if (node === null) return;
+
+    if (node.leftChild) this.postorder(callback, node.leftChild, postorderData);
+    if (node.rightChild)
+      this.postorder(callback, node.rightChild, postorderData);
+
+    if (callback) {
+      callback(node);
+    } else {
+      postorderData.push(node.data);
+      return postorderData;
+    }
+  }
+
   prettyPrint = (node = this.root, prefix = "", isLeft = true) => {
     if (node.rightChild !== null) {
       this.prettyPrint(
@@ -202,3 +217,5 @@ tree.inorder(callback);
 console.log(tree.inorder());
 tree.preorder(callback);
 console.log(tree.preorder());
+tree.postorder(callback);
+console.log(tree.postorder());
