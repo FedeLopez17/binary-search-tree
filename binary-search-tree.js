@@ -100,6 +100,16 @@ class Tree {
     return node;
   }
 
+  find(data, node = this.root) {
+    if (node === null) return null;
+
+    if (data === node.data) return node;
+
+    if (data < node.data) return this.find(data, node.leftChild);
+
+    if (data > node.data) return this.find(data, node.rightChild);
+  }
+
   prettyPrint = (node = this.root, prefix = "", isLeft = true) => {
     if (node.rightChild !== null) {
       this.prettyPrint(
@@ -131,3 +141,5 @@ tree.delete(8);
 tree.prettyPrint();
 tree.delete(6);
 tree.prettyPrint();
+console.log(tree.find(6));
+console.log(tree.find(7));
