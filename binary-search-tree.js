@@ -194,6 +194,27 @@ class Tree {
     return node ? calcHeight(node) : null;
   }
 
+  depth(data, node = this.root) {
+    if (data === null) throw "missing argument!";
+
+    if (data === node.data) {
+      return 0;
+    }
+
+    const leafNode = !node.leftChild && !node.rightChild;
+    if (leafNode) return null;
+
+    if (data < node.data) {
+      const leftDepth = this.depth(data, node.leftChild);
+      return leftDepth !== null ? leftDepth + 1 : null;
+    }
+
+    if (data > node.data) {
+      const rightDepth = this.depth(data, node.rightChild);
+      return rightDepth !== null ? rightDepth + 1 : null;
+    }
+  }
+
   prettyPrint = (node = this.root, prefix = "", isLeft = true) => {
     if (node.rightChild !== null) {
       this.prettyPrint(
@@ -245,3 +266,10 @@ console.log(tree.height(2));
 console.log(tree.height(10));
 console.log(tree.height(22));
 console.log(tree.height(42));
+console.log(tree.depth(7));
+console.log(tree.depth(4));
+console.log(tree.depth(22));
+console.log(tree.depth(8));
+console.log(tree.depth(6));
+console.log(tree.depth(3));
+console.log(tree.depth(78));
