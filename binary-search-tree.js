@@ -110,6 +110,23 @@ class Tree {
     if (data > node.data) return this.find(data, node.rightChild);
   }
 
+  levelOrder(callback, queue = [this.root], levelOrderData = []) {
+    const firstNode = queue.shift();
+    if (!firstNode) return;
+
+    if (firstNode.leftChild) queue.push(firstNode.leftChild);
+    if (firstNode.rightChild) queue.push(firstNode.rightChild);
+
+    if (callback) {
+      callback(firstNode);
+      this.levelOrder(callback, queue);
+    } else {
+      levelOrderData.push(firstNode.data);
+      this.levelOrder(callback, queue, levelOrderData);
+      return levelOrderData;
+    }
+  }
+
   prettyPrint = (node = this.root, prefix = "", isLeft = true) => {
     if (node.rightChild !== null) {
       this.prettyPrint(
@@ -143,3 +160,10 @@ tree.delete(6);
 tree.prettyPrint();
 console.log(tree.find(6));
 console.log(tree.find(7));
+function callback(node) {
+  console.log("level order:");
+  console.log(node);
+  console.log(" ");
+}
+tree.levelOrder(callback);
+console.log(tree.levelOrder());
