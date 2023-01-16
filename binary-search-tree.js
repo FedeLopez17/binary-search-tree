@@ -174,20 +174,14 @@ class Tree {
   }
 
   height(data) {
-    function calcHeight(node, height = -1) {
-      height++;
-
+    function calcHeight(node) {
       const leafNode = !node.leftChild && !node.rightChild;
-      if (leafNode) return height;
+      if (leafNode) return 0;
 
-      const leftHeight = node.leftChild
-        ? calcHeight(node.leftChild, height)
-        : 0;
-      const rightHeight = node.rightChild
-        ? calcHeight(node.rightChild, height)
-        : 0;
+      const leftHeight = node.leftChild ? calcHeight(node.leftChild) + 1 : 0;
+      const rightHeight = node.rightChild ? calcHeight(node.rightChild) + 1 : 0;
 
-      return leftHeight > rightHeight ? leftHeight : rightHeight;
+      return Math.max(leftHeight, rightHeight);
     }
 
     const node = this.find(data);
