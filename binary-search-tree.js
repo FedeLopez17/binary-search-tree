@@ -220,7 +220,7 @@ export default class Tree {
     return difference <= 1;
   }
 
-  balance() {
+  rebalance() {
     const inorderNodes = this.inorder();
     this.root = this.buildTree(inorderNodes);
   }

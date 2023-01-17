@@ -56,9 +56,9 @@ console.log("");
 console.log(`Balanced: ${tree.isBalanced()}`);
 console.log("");
 
-console.log("BALANCE TREE:");
+console.log("REBALANCE TREE:");
 console.log("");
-tree.balance();
+tree.rebalance();
 tree.prettyPrint();
 console.log("");
 console.log(`Balanced: ${tree.isBalanced()}`);
