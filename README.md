@@ -18,3 +18,6 @@ Implementation of  a Binary Search Tree class in JavaScript containing the follo
  
  ## Usage:
 To test the Binary Search class with randomly generated inputs, [make sure you have node installed](https://stackoverflow.com/questions/10475651/how-to-tell-if-node-js-is-installed-or-not), and run `node [path to driver-script.js]`. Furthermore, you could also test the class however you want inside `driver.script.js`. If doing so, consider using [Nodemon](https://www.npmjs.com/package/nodemon) to re-run `driver-script.js` every time you try a new method.
+
+## Drive script output example:
+![binary-search-tree-driver-script-output](https://user-images.githubusercontent.com/95712292/212955659-51e416cd-df43-465c-8d8b-c420875b99c6.png)
