@@ -21,12 +21,7 @@ class Tree {
 
   buildTree(arr) {
     // Base case
-    if (arr.length === 1) {
-      const leafNode = new Node(arr[0]);
-      leafNode.leftChild = null;
-      leafNode.rightChild = null;
-      return leafNode;
-    }
+    if (!arr.length) return null;
 
     // Recursive case
     const mid = Math.floor((arr.length - 1) / 2);
@@ -231,7 +226,12 @@ class Tree {
     return difference <= 1;
   }
 
-  prettyPrint = (node = this.root, prefix = "", isLeft = true) => {
+  balance() {
+    const inorderNodes = this.inorder();
+    this.root = this.buildTree(inorderNodes);
+  }
+
+  prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node.rightChild !== null) {
       this.prettyPrint(
         node.rightChild,
@@ -247,7 +247,7 @@ class Tree {
         true
       );
     }
-  };
+  }
 }
 
 const tree = new Tree(testArray);
@@ -255,37 +255,40 @@ tree.insert(3);
 tree.insert(8);
 tree.insert(10);
 tree.insert(22);
-// tree.prettyPrint();
-tree.delete(22);
-// tree.prettyPrint();
-// tree.delete(8);
-// // tree.prettyPrint();
-// tree.delete(6);
 tree.prettyPrint();
-// console.log(tree.find(6));
-// console.log(tree.find(7));
-// function callback(node) {
-//   console.log("traversal:");
-//   console.log(node);
-//   console.log(" ");
-// }
-// tree.levelOrder(callback);
-// console.log(tree.levelOrder());
-// tree.inorder(callback);
-// console.log(tree.inorder());
-// tree.preorder(callback);
-// console.log(tree.preorder());
-// tree.postorder(callback);
-// console.log(tree.postorder());
-// console.log(tree.height(4));
-// console.log(tree.height(2));
-// console.log(tree.height(10));
-// console.log(tree.height(22));
-// console.log(tree.height(42));
-// console.log(tree.depth(7));
-// console.log(tree.depth(4));
-// console.log(tree.depth(22));
-// console.log(tree.depth(8));
-// console.log(tree.depth(6));
-// console.log(tree.depth(3));
+// // tree.delete(22);
+// // tree.prettyPrint();
+// // tree.delete(8);
+// // // tree.prettyPrint();
+// // tree.delete(6);
+// tree.prettyPrint();
+// // console.log(tree.find(6));
+// // console.log(tree.find(7));
+// // function callback(node) {
+// //   console.log("traversal:");
+// //   console.log(node);
+// //   console.log(" ");
+// // }
+// // tree.levelOrder(callback);
+// // console.log(tree.levelOrder());
+// // tree.inorder(callback);
+// // console.log(tree.inorder());
+// // tree.preorder(callback);
+// // console.log(tree.preorder());
+// // tree.postorder(callback);
+// // console.log(tree.postorder());
+// // console.log(tree.height(4));
+// // console.log(tree.height(2));
+// // console.log(tree.height(10));
+// // console.log(tree.height(22));
+// // console.log(tree.height(42));
+// // console.log(tree.depth(7));
+// // console.log(tree.depth(4));
+// // console.log(tree.depth(22));
+// // console.log(tree.depth(8));
+// // console.log(tree.depth(6));
+// // console.log(tree.depth(3));
+console.log(tree.isBalanced());
+tree.balance();
+tree.prettyPrint();
 console.log(tree.isBalanced());
