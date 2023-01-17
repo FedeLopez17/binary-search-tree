@@ -34,7 +34,7 @@ class Tree {
   insert(data, node = this.root) {
     if (!data) throw "missing argument!";
 
-    if (node === null) {
+    if (!node) {
       return new Node(data);
     }
 
@@ -50,8 +50,8 @@ class Tree {
   }
 
   delete(data, node = this.root) {
-    if (node === null) {
-      return node;
+    if (!node) {
+      return null;
     }
 
     if (data < node.data) {
@@ -96,7 +96,7 @@ class Tree {
   }
 
   find(data, node = this.root) {
-    if (node === null) return null;
+    if (!node) return null;
 
     if (data === node.data) return node;
 
@@ -123,7 +123,7 @@ class Tree {
   }
 
   inorder(callback, node = this.root, inorderData = []) {
-    if (node === null) return;
+    if (!node) return;
 
     if (node.leftChild) this.inorder(callback, node.leftChild, inorderData);
 
@@ -139,7 +139,7 @@ class Tree {
   }
 
   preorder(callback, node = this.root, preorderData = []) {
-    if (node === null) return;
+    if (!node) return;
 
     if (callback) {
       callback(node);
@@ -154,7 +154,7 @@ class Tree {
   }
 
   postorder(callback, node = this.root, postorderData = []) {
-    if (node === null) return;
+    if (!node) return;
 
     if (node.leftChild) this.postorder(callback, node.leftChild, postorderData);
     if (node.rightChild)
@@ -263,31 +263,31 @@ tree.prettyPrint();
 // // tree.delete(6);
 // tree.prettyPrint();
 // // console.log(tree.find(6));
-// // console.log(tree.find(7));
+console.log(tree.find(7));
 // // function callback(node) {
 // //   console.log("traversal:");
 // //   console.log(node);
 // //   console.log(" ");
 // // }
 // // tree.levelOrder(callback);
-// // console.log(tree.levelOrder());
+console.log(tree.levelOrder());
 // // tree.inorder(callback);
-// // console.log(tree.inorder());
+console.log(tree.inorder());
 // // tree.preorder(callback);
-// // console.log(tree.preorder());
-// // tree.postorder(callback);
-// // console.log(tree.postorder());
+console.log(tree.preorder());
+// tree.postorder(callback);
+console.log(tree.postorder());
 // // console.log(tree.height(4));
 // // console.log(tree.height(2));
 // // console.log(tree.height(10));
-// // console.log(tree.height(22));
+console.log(tree.height(22));
 // // console.log(tree.height(42));
 // // console.log(tree.depth(7));
 // // console.log(tree.depth(4));
 // // console.log(tree.depth(22));
 // // console.log(tree.depth(8));
 // // console.log(tree.depth(6));
-// // console.log(tree.depth(3));
+console.log(tree.depth(3));
 console.log(tree.isBalanced());
 tree.balance();
 tree.prettyPrint();
