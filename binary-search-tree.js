@@ -1,14 +1,6 @@
-const testArray = [1, 2, 3, 4, 5, 6, 7];
+import Node from "./node.js";
 
-class Node {
-  constructor(data) {
-    this.data = data;
-    this.leftChild = null;
-    this.rightChild = null;
-  }
-}
-
-class Tree {
+export default class Tree {
   constructor(arr) {
     if (!arr) throw "missing constructor argument!";
 
@@ -167,7 +159,7 @@ class Tree {
       return postorderData;
     }
   }
-
+  // Height is defined as the number of edges in longest path from a given node to a leaf node
   height(data) {
     function calcHeight(node) {
       const leafNode = !node.leftChild && !node.rightChild;
@@ -183,6 +175,7 @@ class Tree {
     return node ? calcHeight(node) : null;
   }
 
+  // Depth is defined as the number of edges in path from a given node to the tree’s root node
   depth(data, node = this.root) {
     if (!data) throw "missing argument!";
 
@@ -204,6 +197,7 @@ class Tree {
     }
   }
 
+  // A balanced tree is one where the difference between heights of left subtree and right subtree of every node is not greater than 1
   isBalanced(node = this.root) {
     const leafNode = !node.leftChild && !node.rightChild;
     if (leafNode) return true;
@@ -249,46 +243,3 @@ class Tree {
     }
   }
 }
-
-const tree = new Tree(testArray);
-tree.insert(3);
-tree.insert(8);
-tree.insert(10);
-tree.insert(22);
-tree.prettyPrint();
-// // tree.delete(22);
-// // tree.prettyPrint();
-// // tree.delete(8);
-// // // tree.prettyPrint();
-// // tree.delete(6);
-// tree.prettyPrint();
-// // console.log(tree.find(6));
-console.log(tree.find(7));
-// // function callback(node) {
-// //   console.log("traversal:");
-// //   console.log(node);
-// //   console.log(" ");
-// // }
-// // tree.levelOrder(callback);
-console.log(tree.levelOrder());
-// // tree.inorder(callback);
-console.log(tree.inorder());
-// // tree.preorder(callback);
-console.log(tree.preorder());
-// tree.postorder(callback);
-console.log(tree.postorder());
-// // console.log(tree.height(4));
-// // console.log(tree.height(2));
-// // console.log(tree.height(10));
-console.log(tree.height(22));
-// // console.log(tree.height(42));
-// // console.log(tree.depth(7));
-// // console.log(tree.depth(4));
-// // console.log(tree.depth(22));
-// // console.log(tree.depth(8));
-// // console.log(tree.depth(6));
-console.log(tree.depth(3));
-console.log(tree.isBalanced());
-tree.balance();
-tree.prettyPrint();
-console.log(tree.isBalanced());
